@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Pro - Track Your Growth</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Track your daily progress, missions, and learning streaks">
+
+  <!-- FIX: Hide both sections immediately so there's no flash on load -->
+  <style>
+    #loginSection, #dashboardSection { display: none; }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="container">
+
+      <!-- Login Section -->
+      <section id="loginSection" class="hero">
+        <div class="login-card glass slide-up">
+          <div class="icon-large float">🚀</div>
+          <h1 class="text-gradient shimmer">Progress Pro</h1>
+          <p>Track your daily progress, missions &amp; learning streaks</p>
+
+          <div class="input-group">
+            <input
+              type="text"
+              id="usernameInput"
+              class="input"
+              placeholder="Enter your name..."
+              autocomplete="name"
+              aria-label="Your name"
+            >
+          </div>
+
+          <button id="loginBtn" class="btn btn-primary btn-lg btn-block">
+            <span>🎯</span> Start Tracking
+          </button>
+        </div>
+      </section>
+
+      <!-- Dashboard Section -->
+      <section id="dashboardSection">
+
+        <!-- Welcome Card -->
+        <div class="welcome-card glass slide-down">
+          <div class="user-row">
+            <div class="user-info">
+              <div class="avatar pulse-glow" id="userAvatar">U</div>
+              <div class="user-details">
+                <h2 id="userName">User</h2>
+                <p>Keep pushing forward! 💪</p>
+              </div>
+            </div>
+
+            <div class="streak-badge">
+              <span class="fire fire-flicker">🔥</span>
+              <div>
+                <span class="count" id="streakCount">0</span>
+                <span class="label">Day Streak</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-lg);">
+            <button id="logoutBtn" class="btn btn-ghost">
+              <span>👋</span> Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid stagger-enter" style="margin-top: var(--space-xl);">
+          <div class="stat-card">
+            <div class="icon">📊</div>
+            <div class="value text-gradient" id="statTotal">0</div>
+            <div class="label">Total Entries</div>
+          </div>
+          <div class="stat-card">
+            <div class="icon">📅</div>
+            <div class="value text-gradient" id="statToday">0</div>
+            <div class="label">Today</div>
+          </div>
+          <div class="stat-card">
+            <div class="icon">📈</div>
+            <div class="value text-gradient" id="statWeek">0</div>
+            <div class="label">This Week</div>
+          </div>
+          <div class="stat-card">
+            <div class="icon">📂</div>
+            <div class="value text-gradient" id="statCategories">0</div>
+            <div class="label">Categories</div>
+          </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="glass" style="padding: var(--space-xl); margin-top: var(--space-xl);">
+          <div class="section-header">
+            <h2><span>📂</span> Your Categories</h2>
+            <button id="addCategoryBtn" class="btn btn-secondary">
+              <span>➕</span> Add New
+            </button>
+          </div>
+
+          <div id="categoriesGrid" class="categories-grid">
+            <!-- Categories rendered by JS -->
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Add Category Modal -->
+  <div id="modalBackdrop" class="modal-backdrop"></div>
+  <div id="modal" class="modal">
+    <div class="modal-header">
+      <h3>✨ Create New Category</h3>
+    </div>
+    <div class="input-group">
+      <input
+        type="text"
+        id="newCategoryInput"
+        class="input"
+        placeholder="Category name (e.g., Reading, Meditation...)"
+        aria-label="New category name"
+      >
+    </div>
+    <div class="modal-actions">
+      <button id="modalClose" class="btn btn-ghost">Cancel</button>
+      <button id="createCategoryBtn" class="btn btn-primary">Create</button>
+    </div>
+  </div>
+
+  <!-- Register Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js")
+          .catch(err => console.warn("SW registration failed:", err));
+      });
+    }
+  </script>
+
+  <!-- Scripts -->
+  <script src="js/store.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category - Progress Pro</title>
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+</head>
+<body>
+  <main class="page">
+    <div class="container">
+
+      <!-- Back Button -->
+      <a href="index.html" id="backBtn" class="back-btn">
+        <span class="arrow">←</span>
+        <span>Back to Home</span>
+      </a>
+
+      <!-- Category Header -->
+      <header class="category-header">
+        <span class="emoji-large" id="categoryEmoji">📌</span>
+        <h1 class="text-gradient" id="categoryName">Category</h1>
+        <p id="categoryStats">0 entries</p>
+      </header>
+
+      <!-- Entry Form -->
+      <section class="entry-form glass slide-up">
+        <h3><span>✍️</span> Add New Entry</h3>
+
+        <div class="input-group">
+          <textarea
+            id="entryText"
+            class="textarea"
+            placeholder="What did you accomplish today? Share your progress, learnings, or thoughts..."
+            aria-label="Write your progress entry"
+          ></textarea>
+          <small id="charCount" style="color: var(--text-muted); display: block; text-align: right; margin-top: -8px;">0 characters</small>
+        </div>
+
+        <button id="saveEntryBtn" class="btn btn-primary btn-lg btn-block">
+          <span>💾</span> Save Entry
+        </button>
+
+        <p style="text-align: center; margin-top: var(--space-sm); font-size: 0.85rem; color: var(--text-muted);">
+          Pro tip: Press <kbd style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">Ctrl</kbd> + <kbd style="background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;">Enter</kbd> to save
+        </p>
+      </section>
+
+      <!-- Entries Section -->
+      <section class="entries-section glass">
+        <h3>
+          <span>📝</span> Your Entries
+          <span class="badge badge-primary" id="entryCount">0</span>
+        </h3>
+
+        <div id="entriesList" class="entries-list">
+          <!-- Entries rendered by JS -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Register Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js")
+          .catch(err => console.warn("SW registration failed:", err));
+      });
+    }
+  </script>
+
+  <!-- Scripts -->
+  <script src="js/store.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/category.js"></script>
+</body>
+</html>
